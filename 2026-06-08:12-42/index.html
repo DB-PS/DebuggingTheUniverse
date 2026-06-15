@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="../components/head/Head.js"></script>
+  <site-head></site-head>
+</head>
+
+<body>
+  <site-banner></site-banner>
+<p>
+  This is my first ever blog. I will be testing out few features I have added to this blog.
+  <side-note note="#sidenote-demo"/>
+</p>
+  <li> Inline and block math equations using MathJax. </li>
+  Inline math: $E = mc^2$. Block math:
+  $$\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}$$
+
+  <li> Sytax highlighted code blocks. </li>
+  <pre><code class="language-javascript">
+function helloWorld() {
+  console.log("Hello, Debugging the Universe!");
+}
+  </code></pre>
+  <pre><code class="language-python">
+def hello():
+  print("Hello, Debugging the Universe!")
+  </code></pre>
+
+  <li> Suspense blocks for readers to DIY. </li>
+  <site-suspense>
+    <b>Spoiler Alert!</b> This content was hidden behind a suspense block. 
+    You can click the eye icon in the right margin to hide it again.
+    $$\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}$$
+  </site-suspense>
+
+  <li>
+    Rich ToolTips for extra context.
+
+    <tool-tip tip="#tooltip-demo-content">Hover over me!</tool-tip>
+  </li>
+
+  <li>Interactive MathBox.js Integration</li>
+  Here is a 2D geometric graph generated using MathBox. You can click and drag to pan the view!
+  <side-note note="#sidenote-demo"/></side-note>
+  <math-box name="Fig 1. Animated Square Rotation over Time" id="fig1">
+    <script type="text/mathbox" src="fig1.js"></script>
+  </math-box>
+
+  <!--</ul>-->
+  More content&hellip;
+  <site-footer>
+    <a href="../">debugging the universe</a>
+  </site-footer>
+
+  <!-- tooltips -->
+  <template id="tooltip-demo-content">
+    This is a <strong>Rich ToolTip</strong> fetched via query selector. <br>
+    It can contain math: $e^{i\pi} + 1 = 0$ <br>
+    and even code: <code class="language-javascript">const x = 42;</code>
+  </template>
+
+  <!-- sidenotes -->
+  <template id="sidenote-demo">
+    This is a side note! It stays in the right margin on desktop and moves inline on smaller screens. 
+    Supports <code class="language-javascript">code</code> and <a href="#">links</a>.
+    <span>Inline math: $E = mc^2$. Block math:</span>
+    $$\int_0^\infty e^{-x^2}\,dx = \frac{\sqrt{\pi}}{2}$$
+  </template>
+
+</body>
+</html>
