@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About | Debugging the Universe</title>
+  <script src="../components/head/Head.js"></script>
+  <site-head></site-head>
+</head>
+<body>
+
+  <a class="back-link" href="../">&larr; index</a>
+
+  <article class="post-content">
+    <header class="post-header">
+      <h1 class="post-title">About</h1>
+      <p class="post-meta">Backend engineer, dual-degree physicist, and reluctant vim evangelist.</p>
+    </header>
+
+    <p>
+      Hi, I&rsquo;m <strong>Darshan Bagrecha</strong> &mdash; a backend engineer based in
+      Bengaluru, India. I build authorization and identity systems for a living, and I write
+      here about the software, AI, physics, and mathematics that keep me up at night.
+    </p>
+
+    <h2>What I do</h2>
+    <p>
+      I&rsquo;m a Software Engineer at <strong>TELUS Digital</strong>, where I work on the
+      systems that decide <em>who is allowed to do what</em>. A few things I&rsquo;ve had a
+      hand in:
+    </p>
+    <ul>
+      <li>
+        Scaling a unified authorization engine to <strong>6M+ daily access requests</strong>,
+        building its <strong>Go</strong> and <strong>Open Policy Agent (OPA)</strong> caching
+        and policy pre-compilation layer for low-latency lookups.
+      </li>
+      <li>
+        Owning a zero-downtime migration of <strong>1M+ users</strong> off <strong>Auth0</strong>
+        to a custom OAuth2/OIDC layer &mdash; a just-in-time re-authentication strategy with
+        zero forced password resets that saves <strong>$120K+ annually</strong>.
+      </li>
+      <li>
+        Onboarding <strong>1.5K+ microservice APIs</strong> onto a unified security model with
+        fine-grained <strong>attribute-based access control (ABAC)</strong>, custom predicates,
+        and organization scoping.
+      </li>
+      <li>
+        Cutting security-policy propagation from a <strong>20-minute deploy cycle to under
+        5 seconds</strong>, and halving a role-resolution API&rsquo;s p95 latency from
+        <strong>7s to 3s</strong> by rethinking a recursive CTE and its PostgreSQL query plan.
+      </li>
+    </ul>
+    <p>
+      Before converting to a full-time role, I interned on the same team &mdash; building a
+      <strong>Go (Gin)</strong> expert-skills service over <strong>6M+ user profiles</strong>
+      and making our <strong>RabbitMQ</strong> event pipelines idempotent and loss-proof with
+      dead-letter recovery.
+    </p>
+
+    <h2>Things I build for fun</h2>
+    <ul>
+      <li>
+        <strong>A database engine from scratch</strong> &mdash; a persistent storage engine in
+        Go with an on-disk B-tree, page management, a key-value interface, and transaction
+        support with concurrent readers and writers.
+      </li>
+      <li>
+        <strong>This blog</strong> &mdash; a zero-framework technical blog in vanilla HTML/CSS/JS,
+        wiring up MathJax for equations, MathBox.js for interactive visualizations, and PrismJS
+        for syntax highlighting.
+      </li>
+    </ul>
+
+    <h2>Background</h2>
+    <p>
+      I hold a dual degree from <strong>BITS Pilani</strong> &mdash; a
+      B.E. (Hons.) in Electronics and Instrumentation and an M.Sc. in Physics (2020&ndash;2025).
+      The physics half is why half the posts here are about the universe and not about caching.
+    </p>
+
+    <h2>Toolbox</h2>
+    <p>
+      <strong>Expertise:</strong> Authentication and authorization (Auth0, OAuth2/OIDC),
+      RBAC/ABAC, Open Policy Agent (OPA), microservices, event-driven systems.<br>
+      <strong>Languages:</strong> Go, Java, Python, SQL, TypeScript, C.<br>
+      <strong>Frameworks &amp; infra:</strong> Gin, FastAPI, RabbitMQ, React.<br>
+      <strong>Databases &amp; caching:</strong> PostgreSQL, MongoDB, Redis.
+    </p>
+
+    <h2>Elsewhere</h2>
+    <p>
+      Find me on <a href="https://github.com/DB-PS">GitHub</a> and
+      <a href="https://www.linkedin.com/in/darshan-bagrecha-0bba75402">LinkedIn</a>, or say hello
+      at <a href="mailto:darshanbagrecha1729@gmail.com">darshanbagrecha1729@gmail.com</a>.
+    </p>
+  </article>
+
+  <site-footer>
+    <a href="../">debugging the universe</a>
+  </site-footer>
+
+</body>
+</html>

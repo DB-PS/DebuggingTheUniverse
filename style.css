@@ -64,7 +64,15 @@ body {
   margin: 0 auto;
   padding: 2rem 1.5rem 3rem;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   transition: background 0.3s, color 0.3s;
+}
+
+/* Let the main content region grow so the footer is pushed to the bottom */
+body > main,
+body > article {
+  flex: 1 0 auto;
 }
 
 a {
