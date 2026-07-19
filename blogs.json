@@ -5,5 +5,19 @@
     "tags": ["test"],
     "description": "",
     "markdown": null
+  },
+  {
+    "title": "Coupled oscillator [WIP]",
+    "date": "2026-06-27:01-45",
+    "tags": ["physics", "WIP"],
+    "description": "",
+    "markdown": null
+  },
+  {
+    "title": "Using vim and how AI ruined it!",
+    "date": "2026-07-18:23-18",
+    "tags": ["programming", "rant"],
+    "description": "",
+    "markdown": null
   }
 ]

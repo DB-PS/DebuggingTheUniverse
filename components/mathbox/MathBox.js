@@ -45,6 +45,8 @@ template.innerHTML = `
     overflow: hidden;
     position: relative;
     background: var(--bg-soft);
+    margin-left: auto;
+    margin-right: auto;
   }
   #container {
     width: 100%;
@@ -132,6 +134,15 @@ class BlogMathBox extends HTMLElement {
     this.shadowRoot.querySelector('.loading').style.display = 'none';
     const container = this.shadowRoot.getElementById('container');
     const disableControls = this.hasAttribute('disable-controls');
+
+    // Handle custom dimensions
+    const graphBox = this.shadowRoot.querySelector('.graph-box');
+    if (this.hasAttribute('height')) {
+      graphBox.style.height = this.getAttribute('height');
+    }
+    if (this.hasAttribute('width')) {
+      graphBox.style.width = this.getAttribute('width');
+    }
     
     // Handle caption
     const captionEl = this.shadowRoot.getElementById('caption');

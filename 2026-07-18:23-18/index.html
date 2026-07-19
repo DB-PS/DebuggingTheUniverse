@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="../components/head/Head.js"></script>
+  <site-head></site-head>
+</head>
+<body>
+
+  <site-banner></site-banner>
+
+  This blog is written as a rant on how AI ruined one thing I liked about programming, and that was the zen of typing and navigating a codebase.
+  <br>
+  <br>
+  <h2> Zen of gardening </h2>
+  We all know that gardening's/farming's best part is where you reap the reward, either in the form of fruit, flowers or a healthy plant. But every gardner eventually falls in love with the process of taking care of the plants.
+  <br>
+  <br>
+  In a similar way, we know system designing, creating flowcharts, and deciding on which components fit well with requirements are the exciting things in the world of software engineering. In the uprise of AI, especially agentic AI, we humans get to do these <em>"cool"</em> things more often than before. Since writing code, creating a plan to structure a codebase and writing test cases, everything is now handled by these LLMs.
+  <br>
+  <br>
+  But if we keep on doing these <em>"cool"</em> things, we lose the value of them, and it eventually leads to creative exhaustion.
+  Writing code by hand was a way to mentally calm yourself down and just focus on the art of typing, navigating the codebase and thinking out loud.
+  It is after you have planned on what you want to grow for the season on your field, the part where you actually sow seeds and take care of them regularly.
+  <br>
+  <br>
+  <h2> Whiteboard Masturbation </h2>
+  <side-note note="#sn1"></side-note>
+  Writing code by hand also gave a developer's mind free time to wander around and de-focus.
+  Constant system designing without ever interacting with the system on ground level often leads to a disconnect between reality and the plan.
+  This has serious repercussions because we humans are way too good at complicating things to satisfy our intellect and since the grunt has to be handled by AI, we don't give a thought on it at all.
+  <br>
+  <em>"Let us make this extensible even if the service only takes care of a singular task. Let us use Factory, Builder or any other complex method for a class that is only used twice or thrice."</em> All of this is possible because you aren't the one typing the Factory out or implementing it.
+  <br>
+  <br>
+  <h2> SHERLOCKED: The little detective game</h2>
+  Writing code is fun, but there is another thing which caused a great sense of satisfaction, and that is debugging.
+  Spinnning up an SSH connection, connecting to a pod using <code>kubectl</code>, grepping through logs, looking at stack traces, dry-running code mentally or trying to reproduce it in the local environment. Doing all this leads to satisfaction.
+  <br>
+  <br>
+  <side-note note="#sn2"></side-note>
+  Alas! It is very rare to do this now. Most of the errors are resolved by yanking error message into an LLM and letting it figure it out. If that isn't possible then just use a better model with more effort.
+  <br>
+  The complete detective game of figuring out where the bug is now becoming a rare skill.
+  It is like Sherlock asking Watson to solve the case and waiting in his chair smoking a cigar while Watson figures it out.
+  <br>
+  <br>
+  <h2><tool-tip tip="#tooltip-vim">VIM</tool-tip></h2>
+  Writing code is fun, but what makes it more fun for me is using Vim to code.
+  Using Vim and not touching the mouse for everything you need to do is really a good social flex.
+  We all are human, and we do feel good by achieving something valuable in our social circle.
+  <side-note note="#sn3"></side-note>
+  But after the dawn of AI, typing and editing code is very rare and could be achieved using any editor. Also, tighter and better AI integration with other editors also makes me think of switching from Vim.
+  <br>
+  <br>
+  <h2>Finally</h2>
+  Even I have become complacent. AI is a great tool but now I have started relying on it involuntarily and my brain now has a daily limit of X tokens.
+  Maybe everything has a price to pay, even the bright future.
+
+  <site-footer>
+    <a href="../">debugging the universe</a>
+  </site-footer>
+
+  <template id="sn1">
+    I have seen this happening with me too, where a very complex idea which satisfies my intellect seems easy to implement just because I don't have to do it.
+    <br>
+    <code><em><b> "LLM will take care of it." </b></em></code>
+  </template>
+  <template id="sn2">
+    I know debuggers exists but using one is difficult especially without an IDE. Also using a debugger is fun because you are following a trail with a sniffer dog.
+  </template>
+  <template id="sn3">
+    The only thing stoping me is CLI: "claude-cli", "antigravity-cli"...
+  </template>
+
+  <!-- tooltips -->
+  <template id="tooltip-vim"> I use VIM btw!😎 </template>
+
+</body>
+</html>
