@@ -62,17 +62,22 @@ body {
   line-height: 1.7;
   max-width: 700px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: 2rem 1.5rem 4.5rem;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   transition: background 0.3s, color 0.3s;
 }
 
-/* Let the main content region grow so the footer is pushed to the bottom */
-body > main,
-body > article {
-  flex: 1 0 auto;
+/* Pin the footer to the bottom of the viewport at all times */
+body > site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-top: 0 !important;
+  padding: 0.6rem 1rem;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  z-index: 10;
 }
 
 a {
@@ -242,8 +247,15 @@ th {
   display: inline-block;
   font-family: "Inter", Helvetica;
   font-size: 0.78rem;
-  margin-right: 6px;
   line-height: 1.5;
+}
+
+/* Separate tags with a bullet dot (index list + blog post header) */
+.blog-tags .tag:not(:last-child)::after,
+.post-tags .tag:not(:last-child)::after {
+  content: "\2022";
+  margin: 0 0.1rem 0 0.45rem;
+  color: var(--text-dim);
 }
 
 /* ── Blog post ────────────────────────────────────────────── */
