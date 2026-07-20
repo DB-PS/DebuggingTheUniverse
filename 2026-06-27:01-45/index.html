@@ -17,9 +17,43 @@
   <side-note note="#sn-1"></side-note>
   The most basic example of a coupled oscillator is two spring oscillators connected via a third spring.
 
-  <math-box name="Two coupled spring oscillator" id="mb-1" height="300px" width="525px" disable-controls>
+  <math-box name="Two coupled spring oscillator" id="mb-1" height="20vw" width="35vw" disable-controls>
     <script type="text/mathbox" src="mb-1.js"></script>
   </math-box>
+
+  Through out this article we will use this system as our primary example, covering the following topics:
+  <ul>
+    <li>Free body diagram <a href="#fbd">#</a></li>
+    <li>Solving Equations of Motion <a href="#eom">#</a></li>
+    <li>Linear Algebra <a href="#lnalg">#</a></li>
+    <li>Normal Modes <a href="#normmode">#</a></li>
+    <li>Phase space <a href="#phspace">#</a></li>
+    <li>Fourier Transform <a href="#fft">#</a></li>
+  </ul>
+  At the end of this article you will have a new outlook towards fourier transform and linear algebra. All due to basic physics problem.
+
+  <h2 id="fbd"> Free body diagram </h2>
+  Before we start creating free body diagrams and write out equation of motion for each masses, we need to clear out few assumptions.
+  <ul>
+    <li>Both masses $m$ are equal</li>
+    <li>All the three springs have same stiffness i.e. $k$</li>
+    <li>Left wall lies on $x = 0$ coordinate</li>
+  </ul>
+
+  Now looking at block 1, we can assume a slight displacement $x_1$ towards right. This causes spring 1 to extend.
+  <math-box name="FBD of block 1" id="fbd-1" height="20vw" width="35vw" disable-controls>
+    <script type="text/mathbox" src="fbd-1.js"></script>
+  </math-box>
+  Similarly for block 2, we can assume a slight displacement $x_2$ towards right. This causes spring 3 to compress.
+
+  <side-note note="#sn-2"></side-note>
+  For spring 2, it will pull block 1 with $k(x_2-x_1)$ and block 2 with $-k(x_2-x_1)$.
+  Keeping displacement terms in order: $-k(x_1-x_2)$ and block 2 with $k(x_1-x_2)$.
+  <h2 id="eom">Solving Equations of Motion</h2>
+  <h2 id="lnalg">Linear Algebra</h2>
+  <h2 id="normmode">Normal Modes</h2>
+  <h2 id="phspace">Phase space</h2>
+  <h2 id="fft">Fourier Transform</h2>
 
   <site-footer>
     <a href="../">debugging the universe</a>
@@ -27,6 +61,9 @@
 
   <template id="sn-1">
     These kind of coupled oscillators are generally called two-coupled oscillator.
+  </template>
+  <template id="sn-2">
+    Here sign takes care of the direction of push and pull by spring 2.
   </template>
 
 </body>

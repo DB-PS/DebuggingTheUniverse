@@ -1,5 +1,8 @@
 const loadedScripts = {};
 
+// Cache of already-rendered LaTeX strings to avoid calling tex2chtml each frame
+const _latexCache = {};
+
 function loadScript(src) {
   if (loadedScripts[src]) return loadedScripts[src];
 
@@ -166,6 +169,43 @@ class BlogMathBox extends HTMLElement {
 
     // The modern MathBox bundle exports to window.MathBox
     const mathbox = window.MathBox.mathBox(options);
+
+    // Register MathBox DOM type for LaTeX labels (uses MathJax tex2chtml).
+    // Guarded so multiple <math-box> elements on the same page don't re-register.
+    if (window.MathBox.DOM && !window.MathBox.DOM.Types.latex) {
+      window.MathBox.DOM.Types.latex = window.MathBox.DOM.createClass({
+        render: function(el) {
+          var color    = this.props.color    || 'inherit';
+          var fontSize = this.props.fontSize || '1em';
+          delete this.props.color;
+          delete this.props.fontSize;
+
+          var tex = this.children;
+
+          // MathJax not ready yet -- show raw tex; html expr re-runs each frame
+          // so the rendered version appears as soon as MathJax finishes loading.
+          if (!window.MathJax || !MathJax.tex2chtml) {
+            this.props.innerHTML = '<span style="color:' + color + ';">' + tex + '</span>';
+            return el('span', this.props);
+          }
+
+          // Render once then serve from cache
+          if (!_latexCache[tex]) {
+            var mathEl = MathJax.tex2chtml(tex);
+            // Inject MathJax CHTML CSS into the document once
+            if (!_latexCache.__cssInjected) {
+              MathJax.startup.document.clear();
+              MathJax.startup.document.updateDocument();
+              _latexCache.__cssInjected = true;
+            }
+            _latexCache[tex] = mathEl.outerHTML;
+          }
+
+          this.props.innerHTML = '<span style="color:' + color + ';font-size:' + fontSize + ';">' + _latexCache[tex] + '</span>';
+          return el('span', this.props);
+        }
+      });
+    }
 
     // Add Reset View button if controls are enabled
     if (!disableControls) {

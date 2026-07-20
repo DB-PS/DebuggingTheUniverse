@@ -16,7 +16,7 @@ view.array({
 })
 view.line({
   color: 'gray',
-  width: 2,
+  width: 5,
 });
 
 view.array({
@@ -26,7 +26,7 @@ view.array({
 })
 view.line({
   color: 'gray',
-  width: 2,
+  width: 5,
 });
 
 view.array({
@@ -36,7 +36,7 @@ view.array({
 })
 view.line({
   color: 'gray',
-  width: 2,
+  width: 5,
 });
 //:::WALLS:::
 
@@ -56,9 +56,10 @@ view.array({
   }
 })
 view.line({
-  color: 'red',
+  color: '#cb4b16',
   stroke: 'solid',
-  width: 2,
+  width: 5,
+  join: 'round',
 });
 //:::LEFT BLOCK:::
 
@@ -73,9 +74,10 @@ view.array({
   }
 })
 view.line({
-  color: 'red',
+  color: '#cb4b16',
   stroke: 'solid',
-  width: 2,
+  width: 5,
+  join: 'round',
 });
 //:::RIGHT BLOCK:::
 
@@ -90,9 +92,9 @@ view.array({
   }
 })
 view.line({
-  color: 'cyan',
+  color: '#268bd2',
   stroke: 'solid',
-  width: 2,
+  width: 5,
 });
 //:::LEFT SPRING:::
 
@@ -107,9 +109,9 @@ view.array({
   }
 })
 view.line({
-  color: 'cyan',
+  color: '#268bd2',
   stroke: 'solid',
-  width: 2,
+  width: 5,
 });
 //:::RIGHT SPRING:::
 
@@ -124,9 +126,9 @@ view.array({
   }
 })
 view.line({
-  color: 'cyan',
+  color: '#268bd2',
   stroke: 'solid',
-  width: 2,
+  width: 5,
 });
 //:::CENTRE SPRING:::
 

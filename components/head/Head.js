@@ -90,6 +90,7 @@ class BlogHead extends HTMLElement {
       document.head.appendChild(s);
     }
 
+
     const script = document.createElement('script');
     script.src = `${prefix}main.js`;
     script.defer = true;
