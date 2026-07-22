@@ -96,6 +96,16 @@ class BlogHead extends HTMLElement {
     script.defer = true;
     document.head.appendChild(script);
 
+    const colorUtilsScript = document.createElement('script');
+    colorUtilsScript.src = `${prefix}libs/color-utils.js`;
+    colorUtilsScript.defer = true;
+    document.head.appendChild(colorUtilsScript);
+
+    const mathUtilsScript = document.createElement('script');
+    mathUtilsScript.src = `${prefix}libs/math-utils.js`;
+    mathUtilsScript.defer = true;
+    document.head.appendChild(mathUtilsScript);
+
     const suspenseScript = document.createElement('script');
     suspenseScript.src = `${prefix}components/suspense/Suspense.js`;
     suspenseScript.defer = true;

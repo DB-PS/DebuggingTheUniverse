@@ -49,7 +49,34 @@
   <side-note note="#sn-2"></side-note>
   For spring 2, it will pull block 1 with $k(x_2-x_1)$ and block 2 with $-k(x_2-x_1)$.
   Keeping displacement terms in order: $-k(x_1-x_2)$ and block 2 with $k(x_1-x_2)$.
+
+  <math-box name="FBD of block 2" id="fbd-2" height="28vw" width="49vw" disable-controls>
+    <script type="text/mathbox" src="fbd-2.js"></script>
+  </math-box>
+
+  Equating forces on each masses we get following equations of motion:
+  $$-kx_1 - k(x_1 - x_2) = m\ddot{x_1} \tag{1}$$
+  $$-kx_2 + k(x_1 - x_2) = m\ddot{x_2} \tag{2}$$
+
   <h2 id="eom">Solving Equations of Motion</h2>
+  <site-suspense>
+  To solve equations $1$ and $2$ we can use a trick. We can add and subtract both equations to get a new set of equations which are equivalent to original.
+
+  $$-kx_2 + k(x_1 - x_2) + kx_1 + k(x_1 - x_2) = m(\ddot{x_2} - \ddot{x_1})\tag{2 - 1}$$
+  $$-3k(x_1 - x_2) = m(\ddot{x_1} - \ddot{x_2})\tag{2 - 1}$$
+
+  $$-kx_2 + k(x_1 - x_2) - kx_1 - k(x_1 - x_2) = m(\ddot{x_2} + \ddot{x_1})\tag{2 + 1}$$
+  $$-k(x_1 + x_2) = m(\ddot{x_1} - \ddot{x_2})\tag{2 + 1}$$
+
+  We can see that there are two equation in form of $(x_1 - x_2)$ and $(x_1 + x_2)$. Naming them $x_{+} = x_1 + x_2$ and $x_{-} = x_1 - x_2$.
+  We get
+
+  <div style="border: 2px solid;">
+    $$-kx_{+} = m\ddot{x}_{+}$$
+    $$-3kx_{-} = m\ddot{x}_{-}$$
+  </div>
+  </site-suspense>
+
   <h2 id="lnalg">Linear Algebra</h2>
   <h2 id="normmode">Normal Modes</h2>
   <h2 id="phspace">Phase space</h2>

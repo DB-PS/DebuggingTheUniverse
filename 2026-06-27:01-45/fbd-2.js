@@ -28,7 +28,7 @@ view.line({
 });
 //:::LEFT BLOCK:::
 
-//===SPRING 1 FORCE===
+//===SPRING 2 FORCE===
 view.array({
   items: 2,
   channels: 2,
@@ -41,9 +41,9 @@ view.vector({
   end: true,
   size: 4
 });
-//:::SPRING 1 FORCE:::
+//:::SPRING 2 FORCE:::
 
-//===SPRING 2 FORCE===
+//===SPRING 3 FORCE===
 view.array({
   items: 2,
   channels: 2,
@@ -56,7 +56,7 @@ view.vector({
   end: true,
   size: 4
 });
-//:::SPRING 2 FORCE:::
+//:::SPRING 3 FORCE:::
 
 view.array({
   items: 1,
@@ -71,13 +71,13 @@ view.point({
 view.array({
   width: 1,
   channels: 2,
-  data: [x_off - l/2 - vs, l/2],
+  data: [x_off + l/2 + vs, l/2],
   live: false,
 })
 .html({
   width: 1,
   expr: function(emit, el) {
-    emit(el('latex', { color: ORANGE, fontSize: '1.1em' }, 'kx_1'));
+    emit(el('latex', { color: ORANGE, fontSize: '1.1em' }, 'k(x_1 - x_2)'));
   },
 })
 .dom({
@@ -90,18 +90,18 @@ view.array({
 view.array({
   width: 1,
   channels: 2,
-  data: [x_off + l/2 + vs, l/2],
+  data: [x_off - l/2 - vs, l/2],
   live: false,
 })
 .html({
   width: 1,
   expr: function(emit, el) {
-    emit(el('latex', { color: ORANGE, fontSize: '1.1em' }, '-k(x_1 - x_2)'));
+    emit(el('latex', { color: ORANGE, fontSize: '1.1em' }, 'kx_2'));
   },
 })
 .dom({
   size: 20,
-  offset: [0, 40],
+  offset: [0, -40],
   depth: 0,
   zoom: 1,
 });

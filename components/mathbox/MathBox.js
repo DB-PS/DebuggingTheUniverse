@@ -58,6 +58,11 @@ template.innerHTML = `
     top: 0;
     left: 0;
   }
+  #container .mathbox-label,
+  #container mjx-container,
+  #container span {
+    text-shadow: none !important;
+  }
   .loading {
     position: absolute;
     top: 50%;
