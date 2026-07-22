@@ -5,16 +5,25 @@ suspenseTemplate.innerHTML = `
     display: block;
     position: relative;
     margin-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   #container {
     position: relative;
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   #content-wrapper {
     transition: filter 0.3s ease;
     user-select: none;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
 
   :host([revealed]) #content-wrapper {
@@ -94,6 +103,9 @@ suspenseTemplate.innerHTML = `
       background: var(--bg);
       border-radius: 50%;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    #content-wrapper {
+      padding-right: 35px;
     }
   }
 </style>

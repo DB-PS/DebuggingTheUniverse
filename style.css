@@ -53,6 +53,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Source Serif 4", Helvetica;
   font-weight: 300;
@@ -65,6 +69,8 @@ body {
   padding: 2rem 1.5rem 4.5rem;
   min-height: 100vh;
   transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 /* Pin the footer to the bottom of the viewport at all times */
@@ -296,16 +302,58 @@ th {
 
 @media (max-width: 600px) {
   body {
-    font-size: 20px;
-    line-height: 1.65;
-    padding: 1.5rem 1.1rem 2.5rem;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  body > site-footer {
+    position: static;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem !important;
+    padding: 1rem 0;
+  }
+
+  .site-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .post-title {
+    font-size: 1.6rem;
+  }
+
+  h1 { font-size: 1.6rem; margin: 1.2rem 0 0.4rem; }
+  h2 { font-size: 1.3rem; margin: 1.1rem 0 0.4rem; }
+  h3 { font-size: 1.1rem; margin: 1rem 0 0.3rem; }
+  h4 { font-size: 1rem;   margin: 0.9rem 0 0.3rem; }
+
+  /* Responsive index layout */
+  .blog-entry-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .blog-entry-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    white-space: normal;
+  }
+
+  .blog-entry-dash {
+    display: none;
   }
 
   .blog-entry-date {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-top: 0.25rem;
   }
+}
+
+/* Responsive MathJax equations styling */
+mjx-container[display="true"],
+mjx-container.mjx-display,
+.MathJax[display="true"] {
+  display: block !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100% !important;
 }

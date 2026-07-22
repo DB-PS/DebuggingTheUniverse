@@ -42,7 +42,9 @@ template.innerHTML = `
     position: relative;
   }
   .graph-box {
-    height: 400px;
+    height: var(--math-box-height, 400px);
+    width: var(--math-box-width, 100%);
+    max-width: 100%;
     border: 1px solid var(--border);
     border-radius: 6px;
     overflow: hidden;
@@ -50,6 +52,12 @@ template.innerHTML = `
     background: var(--bg-soft);
     margin-left: auto;
     margin-right: auto;
+  }
+  @media (max-width: 768px) {
+    .graph-box {
+      width: 100% !important;
+      height: 320px !important;
+    }
   }
   #container {
     width: 100%;
@@ -143,13 +151,12 @@ class BlogMathBox extends HTMLElement {
     const container = this.shadowRoot.getElementById('container');
     const disableControls = this.hasAttribute('disable-controls');
 
-    // Handle custom dimensions
-    const graphBox = this.shadowRoot.querySelector('.graph-box');
+    // Set dimensions using CSS variables on host
     if (this.hasAttribute('height')) {
-      graphBox.style.height = this.getAttribute('height');
+      this.style.setProperty('--math-box-height', this.getAttribute('height'));
     }
     if (this.hasAttribute('width')) {
-      graphBox.style.width = this.getAttribute('width');
+      this.style.setProperty('--math-box-width', this.getAttribute('width'));
     }
     
     // Handle caption

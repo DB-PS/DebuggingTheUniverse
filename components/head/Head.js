@@ -83,11 +83,24 @@ class BlogHead extends HTMLElement {
     document.head.appendChild(favicon);
 
     if (!window.MathJax) {
-      window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+      window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+        output: { displayOverflow: 'linebreak' }
+      };
       const s = document.createElement('script');
-      s.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+      s.src = "https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js";
       s.async = true;
       document.head.appendChild(s);
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise().catch((err) => console.log('MathJax resize error:', err));
+          }
+        }, 300);
+      });
     }
 
 
