@@ -24,6 +24,7 @@ suspenseTemplate.innerHTML = `
     max-width: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
+    padding-right: 35px;
   }
 
   :host([revealed]) #content-wrapper {
@@ -38,10 +39,8 @@ suspenseTemplate.innerHTML = `
 
   #overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,9 +63,11 @@ suspenseTemplate.innerHTML = `
 
   #toggle-btn {
     position: absolute;
-    top: 0;
-    left: calc(100% + 10px);
-    background: none;
+    right: 5px;
+    top: 5px;
+    background: var(--bg);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     border: none;
     padding: 5px;
     cursor: pointer;
@@ -93,20 +94,6 @@ suspenseTemplate.innerHTML = `
 
   :host(:not([revealed])) .icon-hidden {
     display: block;
-  }
-
-  @media (max-width: 800px) {
-    #toggle-btn {
-      left: auto;
-      right: 5px;
-      top: 5px;
-      background: var(--bg);
-      border-radius: 50%;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    #content-wrapper {
-      padding-right: 35px;
-    }
   }
 </style>
 

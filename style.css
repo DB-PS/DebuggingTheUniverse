@@ -62,14 +62,13 @@ body {
   font-weight: 300;
   background: var(--bg);
   color: var(--text);
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 19px;
+  line-height: 1.75;
   max-width: 700px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4.5rem;
   min-height: 100vh;
   transition: background 0.3s, color 0.3s;
-  overflow-x: hidden;
   overflow-wrap: break-word;
 }
 
@@ -302,9 +301,10 @@ th {
 
 @media (max-width: 600px) {
   body {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.6;
     padding: 1.5rem 1rem 2rem;
+    overflow-x: hidden;
   }
 
   body > site-footer {

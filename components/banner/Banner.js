@@ -6,7 +6,7 @@ class BlogBanner extends HTMLElement {
 
     if (post) {
       const formattedDate = formatDate(post.date, true);
-      const tagsHtml = post.tags.map(tag => `<span class="tag">${tag}</span>`).join('\n          ');
+      const tagsHtml = (post.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('\n          ');
       this.innerHTML = `
       <a class="back-link" href="../">&larr; index</a>
       <header class="post-header">
