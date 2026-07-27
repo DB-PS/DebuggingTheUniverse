@@ -37,6 +37,59 @@ sideNoteTemplate.innerHTML = `
     }
   }
 
+  .sidenote-content {
+    overflow: hidden;
+  }
+
+  .sidenote-content.collapsible.collapsed {
+    max-height: calc(1.5em * 3);
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 1.5em), transparent 100%);
+            mask-image: linear-gradient(to bottom, black calc(100% - 1.5em), transparent 100%);
+  }
+
+  .sidenote-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--text);
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .sidenote-toggle.visible {
+    display: inline-flex;
+  }
+
+  .sidenote-toggle:hover {
+    background: var(--border);
+  }
+
+  .sidenote-toggle:active {
+    background: var(--text-dim);
+  }
+
+  .sidenote-toggle svg {
+    width: 0.7rem;
+    height: 0.7rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.15s ease;
+  }
+
+  .sidenote-toggle.expanded svg {
+    transform: rotate(180deg);
+  }
+
   /* Support for inner elements like code/links */
   ::slotted(a), a {
     color: var(--link);
@@ -50,7 +103,12 @@ sideNoteTemplate.innerHTML = `
 </style>
 <link rel="stylesheet" id="prism-theme" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css">
 <div class="sidenote">
-  <slot></slot>
+  <div class="sidenote-content">
+    <slot></slot>
+  </div>
+  <button type="button" class="sidenote-toggle" aria-label="Show more">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </button>
 </div>
 `;
 
@@ -67,14 +125,16 @@ class BlogSideNote extends HTMLElement {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     const noteSelector = this.getAttribute('note');
-    let container = this.shadowRoot.querySelector('.sidenote');
+    const content = this.shadowRoot.querySelector('.sidenote-content');
+    const container = content;
     if (noteSelector) {
       const targetEl = document.querySelector(noteSelector);
       if (targetEl) {
-        // Find the inner .sidenote container and inject HTML
-        container.innerHTML = targetEl.innerHTML;
+        content.innerHTML = targetEl.innerHTML;
       }
     }
+
+    this._setupCollapse();
 
     // Slotted content might need explicit triggering for Prism/MathJax
     // because standard DOM events might miss Shadow DOM boundaries.
@@ -93,11 +153,15 @@ class BlogSideNote extends HTMLElement {
       }
       
       if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise([container]).catch((err) => console.log('MathJax error: ', err));
+        window.MathJax.typesetPromise([container])
+          .then(() => this._setupCollapse())
+          .catch((err) => console.log('MathJax error: ', err));
       } else {
         setTimeout(() => {
           if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([container]).catch((err) => console.log('MathJax error: ', err));
+            window.MathJax.typesetPromise([container])
+              .then(() => this._setupCollapse())
+              .catch((err) => console.log('MathJax error: ', err));
           }
         }, 500);
       }
@@ -105,7 +169,38 @@ class BlogSideNote extends HTMLElement {
 
     // Run once immediately, and maybe again if loaded late
     runParsers();
-    setTimeout(runParsers, 500);
+    setTimeout(() => {
+      runParsers();
+      this._setupCollapse();
+    }, 500);
+  }
+
+  _setupCollapse() {
+    const content = this.shadowRoot.querySelector('.sidenote-content');
+    const toggle = this.shadowRoot.querySelector('.sidenote-toggle');
+    if (!content || !toggle) return;
+
+    if (!this._toggleBound) {
+      this._toggleBound = true;
+      toggle.addEventListener('click', () => {
+        const isCollapsed = content.classList.toggle('collapsed');
+        toggle.classList.toggle('expanded', !isCollapsed);
+        toggle.setAttribute('aria-label', isCollapsed ? 'Show more' : 'Show less');
+      });
+    }
+
+    // Measure against the natural (uncollapsed) height to decide if collapsing is needed.
+    content.classList.remove('collapsible', 'collapsed');
+    const lineHeight = parseFloat(getComputedStyle(content).lineHeight) || 0;
+    const maxCollapsedHeight = lineHeight * 3;
+    const needsCollapse = content.scrollHeight > maxCollapsedHeight + 1;
+
+    toggle.classList.toggle('visible', needsCollapse);
+    if (needsCollapse) {
+      content.classList.add('collapsible', 'collapsed');
+      toggle.classList.remove('expanded');
+      toggle.setAttribute('aria-label', 'Show more');
+    }
   }
 
   _syncPrismTheme() {

@@ -59,6 +59,7 @@
   $$-kx_2 + k(x_1 - x_2) = m\ddot{x_2} \tag{2}$$
 
   <h2 id="eom">Solving Equations of Motion</h2>
+  <side-note note="#sn-3"></side-note>
   <site-suspense>
   To solve equations $1$ and $2$ we can use a trick. We can add and subtract both equations to get a new set of equations which are equivalent to original.
 
@@ -82,9 +83,48 @@
   $$x_{+} = A_{+}\cos(\omega_0t - \phi_{+})$$
   $$x_{-} = A_{-}\cos(\sqrt{3}\omega_0t - \phi_{-})$$
   Transforming $x_+$ and $x_-$ back to $x_1$ and $x_2$ we get:
+  $$x_1 = \cfrac{1}{2}(x_+ + x_-)$$
+  $$x_{1} = \cfrac{A_{+}}{2}\cos(\omega_0t - \phi_{+}) + \cfrac{A_{-}}{2}\cos(\sqrt{3}\omega_0t - \phi_{-})$$
+  $$x_2 = \cfrac{1}{2}(x_+ - x_-)$$
+  $$x_{2} = \cfrac{A_{+}}{2}\cos(\omega_0t - \phi_{+}) - \cfrac{A_{-}}{2}\cos(\sqrt{3}\omega_0t - \phi_{-})$$
+  Since $A_+$ and $A_-$ arbitary constants we can absorb the factor of $1/2$ in them, resulting in:
+  $$x_{1} = A_{+}\cos(\omega_0t - \phi_{+}) + A_{-}\cos(\sqrt{3}\omega_0t - \phi_{-})$$
+  $$x_{2} = A_{+}\cos(\omega_0t - \phi_{+}) - A_{-}\cos(\sqrt{3}\omega_0t - \phi_{-})$$
   </site-suspense>
 
   <h2 id="lnalg">Linear Algebra</h2>
+  If we want to generalise coupled oscillators, we can start from the differential equation itself. Writing it in a concise way using linear algebra gives us a new perspective for this problem.
+  $$-kx_1 - k(x_1 - x_2) = m\ddot{x_1} \tag{1}$$
+  $$-kx_2 + k(x_1 - x_2) = m\ddot{x_2} \tag{2}$$
+  Substituting $\omega_0 = \sqrt{\cfrac{k}{m}}$
+  $$
+    \begin{pmatrix}
+      \ddot{x_1} \\
+      \ddot{x_2}
+    \end{pmatrix}
+    =
+    \begin{bmatrix}
+        -2\omega_0^2 & \omega_0^2 \\
+        \omega_0^2 & -2\omega_0^2
+    \end{bmatrix}
+    \begin{pmatrix}
+        x_1 \\
+        x_2
+    \end{pmatrix}
+  $$
+
+  <side-note note="#sn-4"></side-note>
+  This looks very similar to differential equation $\ddot{x} = \alpha \cdot x$ but instead of $x$ and $\alpha$ being a scalar quantity they are now vectors and matrix respectively.
+  $$\ddot{X} = \hat{\Omega}\cdot X$$
+  General solution to $\ddot{x} = \alpha \cdot x$ are of form $Ae^{s\cdot t}$ where $s \in \mathbb{C}$ and $A \in \mathbb{R}$.
+  Extending it to vector form, general solution should be of form $\mathbf{A}e^{s\cdot t}$ where $s \in \mathbb{C}$ and $\mathbf{A} \in \mathbb{R}^2$.
+  <br>
+  Substituting this in the ODE, we get:
+  $$s^2\mathbf{A}e^{s\cdot t} = \hat{\Omega}\cdot\mathbf{A}e^{s\cdot t}$$
+  $$s^2\mathbf{A} = \hat{\Omega}\cdot\mathbf{A}$$
+  $$\mathbf{0} = \hat{\Omega}\cdot\mathbf{A} - s^2\mathbb{I}\mathbf{A}$$
+  $$\mathbf{0} = (\hat{\Omega} - s^2\mathbb{I})\mathbf{A}$$
+
   <h2 id="normmode">Normal Modes</h2>
   <h2 id="phspace">Phase space</h2>
   <h2 id="fft">Fourier Transform</h2>
@@ -93,11 +133,21 @@
     <a href="../">debugging the universe</a>
   </site-footer>
 
+  <!-- SIDE NOTES -->
   <template id="sn-1">
     These kind of coupled oscillators are generally called two-coupled oscillator.
   </template>
   <template id="sn-2">
     Here sign takes care of the direction of push and pull by spring 2.
+  </template>
+  <template id="sn-3">
+    Try to solve the equations yourself!
+  </template>
+  <template id="sn-4">
+    You might ask... why so? Why is $Ae^{s\cdot t}$ a general solution for DE $\ddot{x} = \alpha \cdot x$?
+    <br>
+    The most simple and straight forward answer is, the function/notation $e$ a.k.a $\exp$ is defined to be the solution of the above ODE.
+    $e$ is a notation defined to encode a function whose rate of change is proportional to the function itself.
   </template>
 
 </body>
