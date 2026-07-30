@@ -97,6 +97,7 @@
   If we want to generalise coupled oscillators, we can start from the differential equation itself. Writing it in a concise way using linear algebra gives us a new perspective for this problem.
   $$-kx_1 - k(x_1 - x_2) = m\ddot{x_1} \tag{1}$$
   $$-kx_2 + k(x_1 - x_2) = m\ddot{x_2} \tag{2}$$
+  <side-note note="#sn-4"></side-note>
   Substituting $\omega_0 = \sqrt{\cfrac{k}{m}}$
   $$
     \begin{pmatrix}
@@ -114,7 +115,7 @@
     \end{pmatrix}
   $$
 
-  <side-note note="#sn-4"></side-note>
+  <side-note note="#sn-5"></side-note>
   This looks very similar to differential equation $\ddot{x} = \alpha \cdot x$ but instead of $x$ and $\alpha$ being a scalar quantity they are now vectors and matrix respectively.
   $$\ddot{X} = \hat{\Omega}\cdot X$$
   General solution to $\ddot{x} = \alpha \cdot x$ are of form $Ae^{s\cdot t}$ where $s \in \mathbb{C}$ and $A \in \mathbb{R}$.
@@ -173,12 +174,16 @@
     Try to solve the equations yourself!
   </template>
   <template id="sn-4">
+    [WIP]
+  </template>
+  <template id="sn-5">
     You might ask... why so? Why is $Ae^{s\cdot t}$ a general solution for DE $\ddot{x} = \alpha \cdot x$?
     <br>
     The most simple and straight forward answer is, the function/notation $e$ a.k.a $\exp$ is defined to be the solution of the above ODE.
     $e$ is a notation defined to encode a function whose rate of change is proportional to the function itself.
   </template>
 
+  <!-- TOOL TIPS -->
   <template id="tt-1">
     Linear transformation is any transformation which follows these rules:
     <ul>
