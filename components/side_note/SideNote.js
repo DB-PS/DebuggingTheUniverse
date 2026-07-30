@@ -1,3 +1,46 @@
+const _instances = [];
+let _reflowScheduled = false;
+const _mobileQuery = window.matchMedia('(max-width: 1100px)');
+const NOTE_GAP = 16;
+
+function _reflowAll() {
+  _reflowScheduled = false;
+  if (_mobileQuery.matches) return;
+
+  const boxes = _instances
+    .filter(instance => instance.isConnected)
+    .sort((a, b) => {
+      const position = a.compareDocumentPosition(b);
+      return position & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+    })
+    .map(instance => instance.shadowRoot.querySelector('.sidenote'))
+    .filter(Boolean);
+
+  let minTop = -Infinity;
+  boxes.forEach(box => {
+    box.style.transform = '';
+    const rect = box.getBoundingClientRect();
+    const actualTop = Math.max(rect.top, minTop);
+    const offset = actualTop - rect.top;
+    if (offset > 0.5) {
+      box.style.transform = `translateY(${offset}px)`;
+    }
+    minTop = actualTop + rect.height + NOTE_GAP;
+  });
+}
+
+function scheduleReflow() {
+  if (_reflowScheduled) return;
+  _reflowScheduled = true;
+  requestAnimationFrame(_reflowAll);
+}
+
+let _resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(scheduleReflow, 150);
+});
+
 const sideNoteTemplate = document.createElement('template');
 sideNoteTemplate.innerHTML = `
 <style>
@@ -21,6 +64,7 @@ sideNoteTemplate.innerHTML = `
     padding-left: 1rem;
     pointer-events: auto;
     user-select: auto;
+    transition: transform 0.2s ease;
   }
 
   @media (max-width: 1100px) {
@@ -120,6 +164,7 @@ class BlogSideNote extends HTMLElement {
   }
 
   connectedCallback() {
+    _instances.push(this);
     this._syncPrismTheme();
     const observer = new MutationObserver(() => this._syncPrismTheme());
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -175,6 +220,12 @@ class BlogSideNote extends HTMLElement {
     }, 500);
   }
 
+  disconnectedCallback() {
+    const index = _instances.indexOf(this);
+    if (index !== -1) _instances.splice(index, 1);
+    scheduleReflow();
+  }
+
   _setupCollapse() {
     const content = this.shadowRoot.querySelector('.sidenote-content');
     const toggle = this.shadowRoot.querySelector('.sidenote-toggle');
@@ -186,6 +237,7 @@ class BlogSideNote extends HTMLElement {
         const isCollapsed = content.classList.toggle('collapsed');
         toggle.classList.toggle('expanded', !isCollapsed);
         toggle.setAttribute('aria-label', isCollapsed ? 'Show more' : 'Show less');
+        scheduleReflow();
       });
     }
 
@@ -201,6 +253,8 @@ class BlogSideNote extends HTMLElement {
       toggle.classList.remove('expanded');
       toggle.setAttribute('aria-label', 'Show more');
     }
+
+    scheduleReflow();
   }
 
   _syncPrismTheme() {
