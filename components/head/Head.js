@@ -117,6 +117,16 @@ class BlogHead extends HTMLElement {
     mathboxScript.defer = true;
     document.head.appendChild(mathboxScript);
 
+    const siteBtwScript = document.createElement('script');
+    siteBtwScript.src = `${prefix}components/site_btw/SiteBtw.js`;
+    siteBtwScript.defer = true;
+    document.head.appendChild(siteBtwScript);
+
+    const siteRefScript = document.createElement('script');
+    siteRefScript.src = `${prefix}components/site_ref/SiteRef.js`;
+    siteRefScript.defer = true;
+    document.head.appendChild(siteRefScript);
+
     const themeSwitcherScript = document.createElement('script');
     themeSwitcherScript.src = `${prefix}components/theme_switcher/ThemeSwitcher.js`;
     themeSwitcherScript.defer = true;

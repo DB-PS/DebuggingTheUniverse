@@ -10,9 +10,13 @@
   <site-banner></site-banner>
 
   In this article we will visit the idea of coupled oscillator to visualise the world of frequency space, linear algebra and fourier transform.
+  You will be surprised how all these concepts arise from a simple physical system and how simple ideas can be extrapolated to different concepts.
 
   <h2> What is coupled oscillator? </h2>
   A coupled oscillator are set of oscillators connected through an energy transfering components.
+  Simply speaking, connect two harmonic oscillator with each other using something which can transfer energy and store it.
+  <br>
+  <br>
 
   <side-note note="#sn-1"></side-note>
   The most basic example of a coupled oscillator is two spring oscillators connected via a third spring.
@@ -30,7 +34,7 @@
     <li>Phase space <a href="#phspace">#</a></li>
     <li>Fourier Transform <a href="#fft">#</a></li>
   </ul>
-  At the end of this article you will have a new outlook towards fourier transform and linear algebra. All due to basic physics problem.
+  At the end of this article you will have a new outlook towards fourier transform and linear algebra. All due to a basic physics problem.
 
   <h2 id="fbd"> Free body diagram </h2>
   Before we start creating free body diagrams and write out equation of motion for each masses, we need to clear out few assumptions.
@@ -41,17 +45,14 @@
   </ul>
 
   Now looking at block 1, we can assume a slight displacement $x_1$ towards right. This causes spring 1 to extend.
-  <math-box name="FBD of block 1" id="fbd-1" height="28vw" width="49vw" disable-controls>
-    <script type="text/mathbox" src="fbd-1.js"></script>
-  </math-box>
   Similarly for block 2, we can assume a slight displacement $x_2$ towards right. This causes spring 3 to compress.
 
   <side-note note="#sn-2"></side-note>
   For spring 2, it will pull block 1 with $k(x_2-x_1)$ and block 2 with $-k(x_2-x_1)$.
   Keeping displacement terms in order: $-k(x_1-x_2)$ and block 2 with $k(x_1-x_2)$.
 
-  <math-box name="FBD of block 2" id="fbd-2" height="28vw" width="49vw" disable-controls>
-    <script type="text/mathbox" src="fbd-2.js"></script>
+  <math-box name="FBD of blocks" id="mb-2" height="28vw" width="49vw" disable-controls>
+    <script type="text/mathbox" src="mb-2.js"></script>
   </math-box>
 
   Equating forces on each masses we get following equations of motion:
@@ -120,15 +121,43 @@
   Extending it to vector form, general solution should be of form $\mathbf{A}e^{s\cdot t}$ where $s \in \mathbb{C}$ and $\mathbf{A} \in \mathbb{R}^2$.
   <br>
   Substituting this in the ODE, we get:
-  $$s^2\mathbf{A}e^{s\cdot t} = \hat{\Omega}\cdot\mathbf{A}e^{s\cdot t}$$
-  $$s^2\mathbf{A} = \hat{\Omega}\cdot\mathbf{A}$$
-  $$\mathbf{0} = \hat{\Omega}\cdot\mathbf{A} - s^2\mathbb{I}\mathbf{A}$$
-  $$\mathbf{0} = (\hat{\Omega} - s^2\mathbb{I})\mathbf{A}$$
+  $$\hat{\Omega}\cdot\mathbf{A}e^{s\cdot t} = s^2\mathbf{A}e^{s\cdot t}$$
+  $$\boxed{\hat{\Omega}\cdot\mathbf{A} = s^2\mathbf{A}}$$
+  This looks similar to the defining expression for an eigenvector.
+  <site-btw>
+    Exponential functions can be said as the eigenvector under derivative as transformation.
+    <br>
+    If we define eigenvector as following:
+    $$\mathbf{A}\vec{v} = \lambda\cdot\vec{v}$$
+    i.e. an eigenvector is a vector which scales but preserves its direction under a <tool-tip tip="#tt-1">linear transformation</tool-tip>, in this case $\mathbf{A}$.
+    The scaling factor $\lambda$ is known as eigenvalue.
+    <br>
+    If we generalise the above equation to an operator in place of a matrix (given that the operator is linear), we can say...
+    $$\hat{\Omega}\psi=\lambda\cdot\psi$$
+    where $\psi$ is the eigenfunction.
+    <br>
+    If we assume the operator to be a derivative operator $D$ like $\cfrac{d}{dx}$ then we have...
+    $$Df(x) = \lambda\cdot x$$
+    which by definition is family of exponential functions.
+  </site-btw>
+
+  $$\hat{\Omega}\cdot\mathbf{A} - s^2\mathbb{I}\mathbf{A} = \mathbf{0}$$
+  $$(\hat{\Omega} - s^2\mathbb{I})\mathbf{A} = \mathbf{0}$$
 
   <h2 id="normmode">Normal Modes</h2>
   <h2 id="phspace">Phase space</h2>
   <h2 id="fft">Fourier Transform</h2>
 
+  <!-- REFERENCES -->
+  <site-ref>
+    <li>
+      <a href="https://ocw.mit.edu/courses/res-8-009-introduction-to-oscillations-and-waves-summer-2017/mitres_8_009su17_lec6.pdf">
+        Mit OCW coupled oscillator pdf
+      </a>
+    </li>
+  </site-ref>
+
+  <!-- FOOTER -->
   <site-footer>
     <a href="../">debugging the universe</a>
   </site-footer>
@@ -148,6 +177,14 @@
     <br>
     The most simple and straight forward answer is, the function/notation $e$ a.k.a $\exp$ is defined to be the solution of the above ODE.
     $e$ is a notation defined to encode a function whose rate of change is proportional to the function itself.
+  </template>
+
+  <template id="tt-1">
+    Linear transformation is any transformation which follows these rules:
+    <ul>
+      <li>$\Omega(u + v) = \Omega(u) + \Omega(v)$</li>
+      <li>$\Omega(c \cdot u) = c\cdot \Omega(u)$</li>
+    </ul>
   </template>
 
 </body>
