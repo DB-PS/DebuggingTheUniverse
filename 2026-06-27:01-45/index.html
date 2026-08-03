@@ -12,6 +12,8 @@
   In this article we will visit the idea of coupled oscillator to visualise the world of frequency space, linear algebra and fourier transform.
   You will be surprised how all these concepts arise from a simple physical system and how simple ideas can be extrapolated to different concepts.
 
+  <br>
+  <br>
   <h2> What is coupled oscillator? </h2>
   A coupled oscillator are set of oscillators connected through an energy transfering components.
   Simply speaking, connect two harmonic oscillator with each other using something which can transfer energy and store it.
@@ -28,7 +30,7 @@
   Through out this article we will use this system as our primary example, covering the following topics:
   <ul>
     <li>Free body diagram <a href="#fbd">#</a></li>
-    <li>Solving Equations of Motion <a href="#eom">#</a></li>
+    <li>Solving Equations of Motion (Algebraically)<a href="#eom">#</a></li>
     <li>Linear Algebra <a href="#lnalg">#</a></li>
     <li>Normal Modes <a href="#normmode">#</a></li>
     <li>Phase space <a href="#phspace">#</a></li>
@@ -36,6 +38,8 @@
   </ul>
   At the end of this article you will have a new outlook towards fourier transform and linear algebra. All due to a basic physics problem.
 
+  <br>
+  <br>
   <h2 id="fbd"> Free body diagram </h2>
   Before we start creating free body diagrams and write out equation of motion for each masses, we need to clear out few assumptions.
   <ul>
@@ -45,6 +49,7 @@
   </ul>
 
   Now looking at block 1, we can assume a slight displacement $x_1$ towards right. This causes spring 1 to extend.
+  <br>
   Similarly for block 2, we can assume a slight displacement $x_2$ towards right. This causes spring 3 to compress.
 
   <side-note note="#sn-2"></side-note>
@@ -59,7 +64,9 @@
   $$-kx_1 - k(x_1 - x_2) = m\ddot{x_1} \tag{1}$$
   $$-kx_2 + k(x_1 - x_2) = m\ddot{x_2} \tag{2}$$
 
-  <h2 id="eom">Solving Equations of Motion</h2>
+  <br>
+  <br>
+  <h2 id="eom">Solving Equations of Motion (Algebraically)</h2>
   <side-note note="#sn-3"></side-note>
   <site-suspense>
   To solve equations $1$ and $2$ we can use a trick. We can add and subtract both equations to get a new set of equations which are equivalent to original.
@@ -93,8 +100,32 @@
   $$x_{2} = A_{+}\cos(\omega_0t - \phi_{+}) - A_{-}\cos(\sqrt{3}\omega_0t - \phi_{-})$$
   </site-suspense>
 
+  <br>
+  <br>
   <h2 id="lnalg">Linear Algebra</h2>
-  If we want to generalise coupled oscillators, we can start from the differential equation itself. Writing it in a concise way using linear algebra gives us a new perspective for this problem.
+  If we want to generalise coupled oscillators, we can start from the differential equation itself. Writing it in a concise way using vector notation gives us a new perspective for this problem.
+  <site-btw>
+    There are a lot of ways to visualise stuff and not visualising is also another way to visualise it.
+    <br>
+    <br>
+    In this case we are treating vectors in similar way.
+    <br>
+    For a physicist it might be an entity with direction and magnitude.
+    <br>
+    For students it might be something with origin and arrow-shaped head.
+    <br>
+    For mathematician it might be an entity which transforms like a vector (confusing but let's not go into this now).
+    <br>
+    For this particular case we are treating a vector for what it is in computer science i.e. "list of data points".
+    <br>
+    <br>
+    Using this as our understanding of vector, we can represent position of oscillators (blocks) as $ \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} $.
+    Purely treating the two parameters as data points. Applying the derivative operator twice on this representation give us
+    $ \begin{pmatrix} \ddot{x_1} \\ \ddot{x_2} \end{pmatrix} $ and using matrix multiplication rules we get to the equation below.
+    <br>
+    <br>
+    So not visualising at first and treating things as parameters helped us get to a more concise form of equation of motions.
+  </site-btw>
   $$-kx_1 - k(x_1 - x_2) = m\ddot{x_1} \tag{1}$$
   $$-kx_2 + k(x_1 - x_2) = m\ddot{x_2} \tag{2}$$
   <side-note note="#sn-4"></side-note>
@@ -145,8 +176,14 @@
   $$\hat{\Omega}\cdot\mathbf{A} - s^2\mathbb{I}\mathbf{A} = \mathbf{0}$$
   $$(\hat{\Omega} - s^2\mathbb{I})\mathbf{A} = \mathbf{0}$$
 
+  <br>
+  <br>
   <h2 id="normmode">Normal Modes</h2>
+  <br>
+  <br>
   <h2 id="phspace">Phase space</h2>
+  <br>
+  <br>
   <h2 id="fft">Fourier Transform</h2>
 
   <!-- REFERENCES -->
@@ -174,7 +211,19 @@
     Try to solve the equations yourself!
   </template>
   <template id="sn-4">
-    [WIP]
+    $$-(k/m)x_1 - (k/m)(x_1 - x_2) = \ddot{x_1}$$
+    <br>
+    $$-(k/m)x_2 + (k/m)(x_1 - x_2) = \ddot{x_2}$$
+    <br>
+    <br>
+    $$-2(k/m)x_1 + (k/m)x_2 = \ddot{x_1}$$
+    <br>
+    $$+(k/m)x_1 - 2(k/m)x_2 = \ddot{x_2}$$
+    <br>
+    <br>
+    $$-2\omega_{0}^{2}x_1 + \omega_{0}^{2}x_2 = \ddot{x_1}$$
+    <br>
+    $$+\omega_{0}^{2}x_1 - 2\omega_{0}^{2}x_2 = \ddot{x_2}$$
   </template>
   <template id="sn-5">
     You might ask... why so? Why is $Ae^{s\cdot t}$ a general solution for DE $\ddot{x} = \alpha \cdot x$?
